@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trust Center — Omegatheme</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --purple:#6B4EFF;
+  --purple-dark:#5038D4;
+  --purple-hover:#7C62FF;
+  --purple-light:#F0EEFF;
+  --purple-mid:#EDE9FF;
+  --navy:#12122A;
+  --navy2:#1A1A3E;
+  --crimson:#8B1A4A;
+  --text:#1A1A2E;
+  --text-2:#5A5A7A;
+  --text-3:#8888AA;
+  --border:#E8E8F0;
+  --border-light:#F2F2F8;
+  --bg:#FAFAFE;
+  --white:#FFFFFF;
+  --green:#059669;
+  --green-bg:#ECFDF5;
+  --green-border:#A7F3D0;
+  --amber-bg:#FFFBEB;
+  --amber-text:#92400E;
+  --amber-border:#FDE68A;
+  --orange-bg:#FFF7ED;
+  --orange-text:#9A3412;
+  --orange-border:#FED7AA;
+  --blue-bg:#EFF6FF;
+  --blue-text:#1E40AF;
+  --blue-border:#BFDBFE;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:var(--bg);font-size:15px;line-height:1.65}
+
+/* STRIPE */
+.stripe{height:3px;background:linear-gradient(90deg,var(--crimson),var(--purple),var(--crimson))}
+
+/* NAV */
+.nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:62px;position:sticky;top:0;z-index:200;box-shadow:0 1px 0 var(--border)}
+.nav-brand{display:flex;align-items:center;gap:9px;font-size:15px;font-weight:600;color:var(--text);text-decoration:none;letter-spacing:-0.2px}
+.nav-brand span{color:var(--purple)}
+.nav-right{display:flex;align-items:center;gap:4px}
+.nav-item{font-size:13px;color:var(--text-2);padding:7px 13px;border-radius:7px;cursor:pointer;transition:all .15s}
+.nav-item:hover{background:var(--purple-light);color:var(--purple)}
+.btn-nav{background:var(--purple);color:#fff;font-size:13px;font-weight:500;padding:8px 18px;border-radius:8px;border:none;cursor:pointer;margin-left:6px;transition:background .15s}
+.btn-nav:hover{background:var(--purple-dark)}
+
+/* HERO */
+.hero{background:var(--navy);padding:72px 48px 60px;text-align:center;position:relative;overflow:hidden}
+.orb1{position:absolute;top:-120px;right:-100px;width:440px;height:440px;border-radius:50%;background:rgba(107,78,255,0.1);pointer-events:none}
+.orb2{position:absolute;bottom:-100px;left:-80px;width:320px;height:320px;border-radius:50%;background:rgba(139,26,74,0.08);pointer-events:none}
+.hero-inner{position:relative;z-index:1;max-width:700px;margin:0 auto}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(107,78,255,0.18);color:#B09FFF;font-size:11px;font-weight:500;padding:5px 16px;border-radius:20px;border:1px solid rgba(107,78,255,0.3);margin-bottom:22px;letter-spacing:0.6px;text-transform:uppercase}
+.pulse{width:6px;height:6px;border-radius:50%;background:#6B4EFF;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-size:40px;font-weight:600;color:#fff;line-height:1.2;margin-bottom:16px;letter-spacing:-0.5px}
+.hero h1 em{color:#9D8FFF;font-style:normal}
+.hero p{font-size:14px;color:rgba(255,255,255,0.52);line-height:1.75;margin-bottom:44px;max-width:580px;margin-left:auto;margin-right:auto}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:12px;overflow:hidden}
+.stat{padding:22px 16px;border-right:1px solid rgba(255,255,255,0.07);text-align:center}
+.stat:last-child{border-right:none}
+.stat-val{font-size:22px;font-weight:600;color:#fff;margin-bottom:5px;letter-spacing:-0.3px}
+.stat-val span{color:#9D8FFF}
+.stat-lbl{font-size:11px;color:rgba(255,255,255,0.4);line-height:1.4}
+
+/* TABS */
+.tabs{background:var(--white);border-bottom:1px solid var(--border);padding:0 48px;display:flex;gap:0;overflow-x:auto;position:sticky;top:62px;z-index:199}
+.tabs::-webkit-scrollbar{display:none}
+.tab{font-size:13px;font-weight:500;color:var(--text-3);padding:17px 20px;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;transition:all .15s;background:none;border-top:none;border-left:none;border-right:none}
+.tab:hover{color:var(--purple)}
+.tab.on{color:var(--purple);border-bottom-color:var(--purple)}
+
+/* CONTENT */
+.content{max-width:980px;margin:0 auto;padding:52px 48px 100px}
+.pane{display:none}
+.pane.on{display:block}
+
+/* SECTION */
+.sec{margin-bottom:54px}
+.sec-hd{display:flex;align-items:flex-start;gap:14px;margin-bottom:24px}
+.ico{width:40px;height:40px;border-radius:10px;background:var(--purple-light);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ico svg{width:19px;height:19px;stroke:var(--purple);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.sec-title{font-size:20px;font-weight:600;color:var(--text);margin-bottom:3px;letter-spacing:-0.2px}
+.sec-sub{font-size:13px;color:var(--text-2);line-height:1.55}
+
+/* CARDS */
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(275px,1fr));gap:14px}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:22px 24px;transition:border-color .15s,box-shadow .15s}
+.card:hover{border-color:var(--purple);box-shadow:0 2px 14px rgba(107,78,255,0.08)}
+.ctag{display:inline-block;font-size:10px;font-weight:600;color:var(--purple);background:var(--purple-light);padding:3px 9px;border-radius:7px;margin-bottom:11px;letter-spacing:0.4px;text-transform:uppercase;font-family:'DM Mono',monospace}
+.card h3{font-size:14px;font-weight:600;color:var(--text);margin-bottom:8px;line-height:1.4}
+.card p{font-size:13px;color:var(--text-2);line-height:1.65;margin-bottom:12px}
+.pills{display:flex;flex-wrap:wrap;gap:5px}
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;background:var(--bg);color:var(--text-3);border:1px solid var(--border)}
+
+/* ROWS */
+.rows{display:flex;flex-direction:column;gap:10px}
+.row{display:flex;align-items:flex-start;gap:14px;padding:16px 20px;background:var(--white);border:1px solid var(--border);border-radius:12px;transition:border-color .15s}
+.row:hover{border-color:var(--purple)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--purple);flex-shrink:0;margin-top:7px}
+.row h4{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px}
+.row p{font-size:13px;color:var(--text-2);line-height:1.6}
+
+/* TABLE */
+.tbl-wrap{background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead th{text-align:left;padding:11px 18px;background:var(--bg);color:var(--text-3);font-weight:600;font-size:11px;border-bottom:1px solid var(--border);letter-spacing:0.4px;text-transform:uppercase}
+tbody td{padding:14px 18px;border-bottom:1px solid var(--border-light);color:var(--text);vertical-align:middle}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover td{background:#FAFAFD}
+.mono{font-family:'DM Mono',monospace;font-size:12px;font-weight:500;color:var(--purple)}
+
+/* BADGES */
+.badge{display:inline-block;font-size:10px;padding:3px 10px;border-radius:20px;font-weight:500}
+.b-green{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)}
+.b-amber{background:var(--amber-bg);color:var(--amber-text);border:1px solid var(--amber-border)}
+.b-orange{background:var(--orange-bg);color:var(--orange-text);border:1px solid var(--orange-border)}
+.b-purple{background:var(--purple-light);color:var(--purple);border:1px solid rgba(107,78,255,0.2)}
+.b-blue{background:var(--blue-bg);color:var(--blue-text);border:1px solid var(--blue-border)}
+
+/* ALERTS */
+.alert{display:flex;gap:12px;padding:14px 18px;border-radius:10px;margin-bottom:24px;align-items:flex-start}
+.alert svg{flex-shrink:0;margin-top:1px;width:15px;height:15px;fill:none;stroke-width:2;stroke-linecap:round}
+.a-blue{background:var(--blue-bg);border:1px solid var(--blue-border)}
+.a-blue svg{stroke:#2563EB}
+.a-blue p{font-size:13px;color:var(--blue-text);line-height:1.6}
+.a-green{background:var(--green-bg);border:1px solid var(--green-border)}
+.a-green svg{stroke:var(--green)}
+.a-green p{font-size:13px;color:#065F46;line-height:1.6}
+
+/* COMPLIANCE GRID */
+.comp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px}
+.comp-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:22px 14px;text-align:center;transition:border-color .15s,box-shadow .15s}
+.comp-card:hover{border-color:var(--purple);box-shadow:0 2px 10px rgba(107,78,255,0.08)}
+.comp-ico{width:42px;height:42px;border-radius:11px;background:var(--purple-light);display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
+.comp-ico svg{width:20px;height:20px;stroke:var(--purple);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.comp-name{font-size:12px;font-weight:600;color:var(--text);margin-bottom:4px}
+.comp-st{font-size:11px}
+.st-live{color:var(--green)}
+.st-wip{color:var(--amber-text)}
+.st-cert{color:#2563EB}
+
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px}
+.cc{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:20px 22px;transition:border-color .15s}
+.cc:hover{border-color:var(--purple)}
+.cc-role{font-size:10px;font-weight:600;color:var(--purple);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:7px;font-family:'DM Mono',monospace}
+.cc h4{font-size:14px;font-weight:600;margin-bottom:5px}
+.cc p{font-size:12px;color:var(--text-2);line-height:1.6;margin-bottom:10px}
+.cc a{font-size:12px;color:var(--purple);text-decoration:none;font-family:'DM Mono',monospace;display:block;margin-top:4px}
+.cc a:hover{text-decoration:underline}
+
+/* FEATURE GRID */
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.feat{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:22px}
+.feat:hover{border-color:var(--purple)}
+.feat-ico{width:38px;height:38px;border-radius:9px;background:var(--purple-light);display:flex;align-items:center;justify-content:center;margin-bottom:13px}
+.feat-ico svg{width:18px;height:18px;stroke:var(--purple);stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.feat h4{font-size:13px;font-weight:600;color:var(--text);margin-bottom:5px}
+.feat p{font-size:12px;color:var(--text-2);line-height:1.6}
+
+/* INFO BOX */
+.infobox{background:var(--purple-mid);border:1px solid rgba(107,78,255,0.15);border-radius:12px;padding:20px 24px;margin-top:14px}
+.infobox p{font-size:13px;color:var(--text-2);line-height:1.7}
+.infobox strong{color:var(--text)}
+
+/* PROCESS */
+.process{display:flex;flex-direction:column;gap:0;padding-left:14px;border-left:2px solid var(--border)}
+.pstep{padding:0 0 26px 24px;position:relative}
+.pstep:last-child{padding-bottom:0}
+.pstep::before{content:'';position:absolute;left:-9px;top:4px;width:16px;height:16px;border-radius:50%;background:var(--purple-light);border:2px solid var(--purple)}
+.pstep::after{content:'';position:absolute;left:-4px;top:9px;width:6px;height:6px;border-radius:50%;background:var(--purple)}
+.pstep-n{font-size:10px;font-weight:600;color:var(--purple);font-family:'DM Mono',monospace;margin-bottom:4px;letter-spacing:0.3px}
+.pstep h4{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px}
+.pstep p{font-size:12px;color:var(--text-2);line-height:1.6}
+
+/* DIVIDER */
+hr{border:none;border-top:1px solid var(--border);margin:40px 0}
+
+/* CTA */
+.cta{background:var(--navy);border-radius:14px;padding:40px 36px;text-align:center;position:relative;overflow:hidden;margin-top:16px}
+.cta::before{content:'';position:absolute;top:-80px;right:-80px;width:260px;height:260px;border-radius:50%;background:rgba(107,78,255,0.12);pointer-events:none}
+.cta-in{position:relative;z-index:1}
+.cta h3{font-size:19px;font-weight:600;color:#fff;margin-bottom:9px}
+.cta p{font-size:14px;color:rgba(255,255,255,0.52);margin-bottom:24px;line-height:1.7}
+.btn-cta{display:inline-block;background:var(--purple);color:#fff;font-size:13px;font-weight:600;padding:12px 26px;border-radius:9px;border:none;cursor:pointer;transition:background .15s;letter-spacing:0.2px}
+.btn-cta:hover{background:var(--purple-hover)}
+
+/* UPTIME BAR */
+.uptime-months{display:grid;grid-template-columns:repeat(12,1fr);gap:3px;margin:10px 0 6px}
+.um{height:28px;border-radius:4px;background:#16A34A;position:relative;cursor:default}
+.um.incident{background:#D97706}
+.um:hover::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 5px);left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;font-size:10px;padding:4px 8px;border-radius:5px;white-space:nowrap;z-index:10;font-family:'DM Mono',monospace}
+.uptime-legend{display:flex;gap:16px;align-items:center;font-size:11px;color:var(--text-3)}
+.ul-dot{width:10px;height:10px;border-radius:2px;background:#16A34A}
+.ul-dot.i{background:#D97706}
+
+/* STATUS */
+.status-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.status-card{background:var(--white);border:1px solid var(--border);border-radius:11px;padding:16px 18px;display:flex;align-items:center;gap:12px}
+.status-light{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.sl-green{background:#16A34A;box-shadow:0 0 6px rgba(22,163,74,0.5)}
+.sl-amber{background:#D97706;box-shadow:0 0 6px rgba(217,119,6,0.5)}
+.status-info h5{font-size:12px;font-weight:600;color:var(--text);margin-bottom:1px}
+.status-info p{font-size:11px;color:var(--text-3)}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .nav,.tabs,.content{padding-left:20px;padding-right:20px}
+  .hero{padding:48px 20px 44px}
+  .hero h1{font-size:27px}
+  .stats-row{grid-template-columns:repeat(2,1fr)}
+  .stat{border-bottom:1px solid rgba(255,255,255,0.07)}
+}
+</style>
+</head>
+<body>
+
+<div class="stripe"></div>
+
+<nav class="nav">
+  <a class="nav-brand" href="#">
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="12" stroke="#6B4EFF" stroke-width="1.5"/><path d="M8 13l3.5 3.5L18 9" stroke="#6B4EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    omega<span>theme</span>
+  </a>
+  <div class="nav-right">
+    <div class="nav-item">Products</div>
+    <div class="nav-item">Platforms</div>
+    <div class="nav-item">Resources</div>
+    <div class="nav-item">About us</div>
+    <button class="btn-nav">Contact Us</button>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="orb1"></div><div class="orb2"></div>
+  <div class="hero-inner">
+    <div class="hero-badge"><span class="pulse"></span>Trust &amp; Compliance Center</div>
+    <h1>Our commitment to <em>security,</em><br>privacy &amp; transparency</h1>
+    <p>Everything you need to understand how Omegatheme protects your data, upholds service agreements, and maintains compliance with global standards — for 39,000+ merchants worldwide.</p>
+    <div class="stats-row">
+      <div class="stat"><div class="stat-val">99<span>.9%</span></div><div class="stat-lbl">Monthly uptime SLA commitment</div></div>
+      <div class="stat"><div class="stat-val"><span>ISO</span> 27001</div><div class="stat-lbl">Information security standard</div></div>
+      <div class="stat"><div class="stat-val">39<span>K+</span></div><div class="stat-lbl">Merchants trust us globally</div></div>
+      <div class="stat"><div class="stat-val"><span>SOC</span> 2</div><div class="stat-lbl">Compliance framework aligned</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab on" onclick="go('overview',this)">Overview</button>
+  <button class="tab" onclick="go('contracts',this)">Contracts &amp; Legal</button>
+  <button class="tab" onclick="go('sla',this)">SLA &amp; Availability</button>
+  <button class="tab" onclick="go('data',this)">Data Protection</button>
+  <button class="tab" onclick="go('compliance',this)">Compliance</button>
+  <button class="tab" onclick="go('support',this)">Support &amp; Contacts</button>
+</div>
+
+<div class="content">
+
+<!-- ═══════════════════════════════════════════
+     TAB 1 — OVERVIEW
+═══════════════════════════════════════════ -->
+<div id="pane-overview" class="pane on">
+
+  <div class="sec">
+    <div class="sec-hd">
+      <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <div>
+        <div class="sec-title">Omegatheme's Trust Philosophy</div>
+        <div class="sec-sub">How we approach security, privacy, and transparency across every product we build</div>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="ctag">Security First</div>
+        <h3>We build security into every layer</h3>
+        <p>From infrastructure design to application code, security is not an afterthought. We apply defense-in-depth principles: encrypted data at rest and in transit, role-based access, and continuous vulnerability monitoring across all products.</p>
+        <div class="pills"><span class="pill">AES-256</span><span class="pill">TLS 1.3</span><span class="pill">RBAC</span><span class="pill">Pen Testing</span></div>
+      </div>
+      <div class="card">
+        <div class="ctag">Privacy by Design</div>
+        <h3>Your data is yours — always</h3>
+        <p>We operate under a strict data minimization policy. We collect only what is necessary to deliver our services, never sell or share merchant data with third parties, and provide full deletion rights upon contract termination within 30 days.</p>
+        <div class="pills"><span class="pill">GDPR</span><span class="pill">CCPA</span><span class="pill">Data Minimization</span></div>
+      </div>
+      <div class="card">
+        <div class="ctag">Transparency</div>
+        <h3>Open and accountable to our customers</h3>
+        <p>We publicly document our compliance posture, sub-processor list, SLA commitments, and incident history. Enterprise customers receive on-request access to security questionnaires, audit evidence packages, and our DPA.</p>
+        <div class="pills"><span class="pill">Sub-processor List</span><span class="pill">Audit Reports</span><span class="pill">DPA</span></div>
+      </div>
+      <div class="card">
+        <div class="ctag">Reliability</div>
+        <h3>99.9% uptime — no excuses</h3>
+        <p>Our infrastructure runs on multi-region cloud with automated failover. We commit to a 99.9% monthly uptime SLA, daily backups with 30-day retention, and a tested disaster recovery plan with RTO ≤ 4 hours.</p>
+        <div class="pills"><span class="pill">Multi-region</span><span class="pill">Auto-failover</span><span class="pill">RTO ≤ 4h</span></div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="sec">
+    <div class="sec-hd">
+      <div class="ico"><svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+      <div>
+        <div class="sec-title">Compliance Certifications</div>
+        <div class="sec-sub">Standards and frameworks Omegatheme aligns with or is certified under</div>
+      </div>
+    </div>
+    <div class="comp-grid">
+      <div class="comp-card">
+        <div class="comp-ico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="comp-name">ISO 27001</div>
+        <div class="comp-st st-live">Aligned</div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-ico"><svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+        <div class="comp-name">SOC 2 Type II</div>
+        <div class="comp-st st-wip">In Progress</div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-ico"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+        <div class="comp-name">GDPR</div>
+        <div class="comp-st st-live">Compliant</div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-ico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div>
+        <div class="comp-name">CCPA</div>
+        <div class="comp-st st-live">Aligned</div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-ico"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div>
+        <div class="comp-name">Shopify Partner</div>
+        <div class="comp-st st-cert">Certified</div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg></div>
+        <div class="comp-name">Built for Shopify</div>
+        <div class="comp-st st-cert">Certified</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="cta">
+    <div class="cta-in">
+      <h3>Need contracts, compliance docs, or security reports?</h3>
+      <p>Enterprise customers can request the full MSA, SOW template, DPA, sub-processor list, or audit evidence package.<br>Our Trust Team responds within 1 business day.</p>
+      <button class="btn-cta">Contact Trust Team →</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════
+     TAB 2 — CONTRACTS & LEGAL
+═══════════════════════════════════════════ -->
+<div id="pane-contracts" class="pane">
+
+  <div class="alert a-blue">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    <p>Full contract documents are available upon request following NDA completion. Contact <strong>legal@omegatheme.com</strong> to get started.</p>
+  </div>
+
+  <!-- SOW -->
+  <div class="sec">
+    <div class="sec-hd">
+      <div class="ico"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+      <div>
+        <div class="sec-title">SOW — Statement of Work</div>
+        <div class="sec-sub">The project-level contract defining scope, responsibilities, deliverables, and service commitments</div>
+      </div>
+    </div>
+    <div class="rows">
+      <div class="row"><div class="dot"></div><div><h4>Scope of Services</h4><p>The SOW specifies each service item delivered: app integration, technical support, maintenance cycles, and phase-based deliverables. All scope changes require a signed Change Order addendum before implementation begins.</p></div></div>
+      <div class="row"><div class="dot"></div><div><h4>Data Security Commitment</h4><p>All merchant data is processed under strict data minimization principles. Omegatheme does not use customer data for any purpose outside the agreed SOW scope. All personnel accessing data must sign individual NDAs and complete annual security training.</p></div></div>
+      <div class="row"><div class="dot"></div><div><h4>Service Level Agreement (SLA) Commitment</h4><p>Minimum uptime of 99.9% per calendar month. P1 incident response within 1 hour; P2 within 4 hours. All planned maintenance is communicated at least 72 hours in advance via email and in-app notification.</p></div></div>
+      <div class="row"><div class="dot"></div><div><h4>Information Security &amp; System Protection</h4><p>Systems undergo scheduled vulnerability scanning and annual penetration testing by an independent third party. Access logs are retained for a minimum of 12 months. The incident response plan is activated within 2 hours of any confirmed security breach, including customer notification within 72 hours as required by GDPR.</p></div></div>
+      <div class="row"><div class="dot"></div><div><h4>Support Contact Mechanism</h4><p>Support is available via 24/7 helpdesk ticket portal, business-hours email, and dedicated Slack channel for Enterprise customers. Each customer is assigned a named Delivery Manager as the primary point of contact for all escalations and coordination.</p></div></div>
+      <div class="row"><div class="dot"></div><div><h4>Complaint Handling Obligations</h4><p>All complaints are acknowledged within 4 business hours. A formal written response is provided within 2 business days. If resolution is not reached, the customer may escalate to the designated Business Head per the escalation matrix documented in the SOW. All complaints are logged and tracked to closure.</p></div></div>
+      <div class="row"><div class="dot"></div><div><h4>Business Heads &amp; Delivery Manager Contacts</h4><p>The SOW formally names the Delivery Manager, Business Head, and Customer Success contact on both sides. These contacts are responsible for performance reviews, SLA reporting, and handling all operational and legal queries during the engagement.</p></div></div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- MSA -->
+  <div class="sec">
+    <div class="sec-hd">
+      <div class="ico"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+      <div>
+        <div class="sec-title">MSA — Master Service Agreement</div>
+        <div class="sec-sub">The comprehensive legal framework governing all services between Omegatheme and enterprise customers</div>
+      </div>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="ctag">Clause 1</div>
+        <h3>Information Security</h3>
+        <p>Omegatheme maintains a comprehensive information security program aligned with ISO/IEC 27001. This includes risk management, access controls, data encryption, incident response, and quarterly security training for all employees.</p>
+        <div class="pills"><span class="pill">ISO 27001</span><span class="pill">Risk Management</span><span class="pill">Incident Response</span></div>
+      </div>
+      <div class="card">
+        <div class="ctag">Clause 2</div>
+        <h3>Service Availability</h3>
+        <p>We commit to 99.9% monthly uptime across all production environments. Infrastructure is deployed across multiple regions with automatic failover. Planned downtime is capped at 4 hours per month and requires 72 hours advance notice.</p>
+        <div class="pills"><span class="pill">99.9% SLA</span><span class="pill">Multi-region</span><span class="pill">Auto-failover</span></div>
+      </div>
+      <div class="card">
+        <div class="ctag">Clause 3</div>
+        <h3>Confidentiality</h3>
+        <p>All customer information is treated as strictly confidential. Employees and third-party partners must sign NDAs. Information is disclosed only on a need-to-know basis. Confidentiality obligations survive contract termination for 3 years.</p>
+        <div class="pills"><span class="pill">NDA</span><span class="pill">Need-to-know</span><span class="pill">Post-termination</span></div>
+      </div>
+      <div class="card">
+        <div class="ctag">Clause 4</div>
+        <h3>Access Control</h3>
+        <p>Role-based access control (RBAC) is enforced across all systems. MFA is mandatory for all internal accounts. Privileged access is reviewed quarterly. Employee offboarding triggers access revocation within 24 hours.</p>
+        <div class="pills"><span class="pill">RBAC</span><span class="pill">MFA</span><span class="pill">PAM</span><span class="pill">Quarterly Review</span></div>
+      </div>
+      <div class="card">
+        <div class="ctag">Clause 5</div>
+        <h3>Customer Data Protection</h3>
+        <p>Data is encrypted at rest with AES-256 and in transit with TLS 1.3. Daily automated backups with 30-day retention. Data deletion is completed within 30 days of contract termination upon written request.</p>
+        <div class="pills"><span class="pill">AES-256</span><span class="pill">TLS 1.3</span><span class="pill">30-day backup</span><span class="pill">Right to Delete</span></div>
+      </div>
+      <div class="card">
+        <div class="ctag">Clause 6</div>
+        <h3>Compliance Clause</h3>
+        <p>All operations align with ISO 27001, SOC 2 Type II, GDPR, and CCPA frameworks. Enterprise customers may request audit reports, security questionnaires, and evidence packages. Compliance reviews are conducted annually.</p>
+        <div class="pills"><span class="pill">ISO 27001</span><span class="pill">SOC 2</span><span class="pill">GDPR</span><span class="pill">CCPA</span></div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- DPA -->
+  <div class="sec">
+    <div class="sec-hd">
+      <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div>
+      <div>
+        <div class="sec-title">DPA — Data Processing Agreement</div>
+        <div class="sec-sub">Data processing terms aligned with GDPR and international data protection law</div>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div>
+        <div class="rows">
+          <div class="row"><div class="dot"></div><div><h4>Data Controller / Processor Roles</h4><p>The Customer acts as Data Controller — determining purposes and means of processing. Omegatheme acts as Data Processor — processing data solely on documented instructions from the Controller, with no independent use rights.</p></div></div>
+          <div class="row"><div class="dot"></div><div><h4>Sub-processor Management</h4><p>Omegatheme maintains a publicly available sub-processor list. 30 days' advance notice is provided before any addition or replacement of sub-processors. Customers retain the right to object to new sub-processors within the notice period.</p></div></div>
+          <div class="row"><div class="dot"></div><div><h4>Data Subject Rights</h4><p>Omegatheme assists Controllers in responding to Data Subject Access Requests (DSARs), including rights to access, rectification, erasure, and portability. Responses are facilitated within 72 hours of request receipt.</p></div></div>
+        </div>
+      </div>
+      <div>
+        <div class="rows">
+          <div class="row"><div class="dot"></div><div><h4>Cross-border Data Transfers</h4><p>Transfers outside the EEA are governed by Standard Contractual Clauses (SCCs) as updated by the European Commission. Omegatheme maintains Transfer Impact Assessments (TIAs) for all major data flows.</p></div></div>
+          <div class="row"><div class="dot"></div><div><h4>Breach Notification</h4><p>In the event of a confirmed personal data breach, Omegatheme notifies the Controller within 72 hours of becoming aware. Notification includes the nature of the breach, categories of data affected, and mitigation steps taken.</p></div></div>
+          <div class="row"><div class="dot"></div><div><h4>Audit Rights</h4><p>Customers have the right to audit Omegatheme's data processing activities once per calendar year upon 30 days' written notice, or at any time following a confirmed security incident. Costs are shared equally for routine audits.</p></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="infobox" style="margin-top:16px">
+      <p><strong>Download the DPA:</strong> The full Data Processing Agreement including Standard Contractual Clauses (SCCs) is available upon request. Email <strong>privacy@omegatheme.com</strong> with your company name and the applicable service scope.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════
+     TAB 3 — SLA & AVAILABILITY
+═══════════════════════════════════════════ -->
+<div id="pane-sla" class="pane">
+
+  <div class="alert a-green">
+    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    <p>All services are currently <strong>operational</strong>. View real-time status at <strong>status.omegatheme.com</strong></p>
+  </div>
+
+  <!-- Current status -->
+  <div class="sec">
+    <div class="sec-hd">
+      <div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+      <div>
+        <div class="sec-title">Current Service Status</div>
+        <div class="sec-sub">Live operational health of Omegatheme's core products and infrastructure</div>
+      </div>
+    </div>
+    <div class="status-grid">
+      <div class="status-card"><div class="status-light sl-green"></div><div class="status-info"><h5>Core API &amp; Webhooks</h5><p>Operational — 99.97% this month</p></div></div>
+      <div class="status-card"><div class="status-light sl-green"></div><div class="status-info"><h5>Shopify App Infrastructure</h5><p>Operational — 99.95% this month</p></div></div>
+      <div class="status-card"><div class="status-light sl-green"></div><div class="status-info"><h5>Dashboard &amp; Admin UI</h5><p>Operational — 100% this month</p></div></div>
+      <div class="status-card"><div class="status-light sl-green"></div><div class="status-info"><h5>Data Sync &amp; Analytics</h5><p>Operational — 99.91% this month</p></div></div>
+      <div class="status-card"><div class="status-light sl-green"></div><div class="status-info"><h5>Notification Services</h5><p>Operational — 99.98% this month</p></div></div>
+      <div class="status-card"><div class="status-light sl-green"></div><div class="status-info"><h5>Authentication &amp; SSO</h5><p>Operational — 100% this month</p></div></div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Historical uptime -->
+  <div class="sec">
+    <div class="sec-hd">
+      <div class="ico"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+      <div>
+        <div class="sec-title">Historical Uptime — Last 12 Months</div>
+        <div class="sec-sub">Monthly availability across all production environments. Green = 100%, Amber = minor incident (&lt;1h).</div>
+      </div>
+    </div>
+    <div class="uptime-months">
+      <div class="um" data-tip="May 2024 — 100%"></div>
+      <div class="um" data-tip="Jun 2024 — 100%"></div>
+      <div class="um" data-tip="Jul 2024 — 99.97%"></div>
+      <div class="um incident" data-tip="Aug 2024 — 99.81% (1 incident)"></div>
+      <div class="um" data-tip="Sep 2024 — 100%"></div>
+      <div class="um" data-tip="Oct 2024 — 100%"></div>
+      <div class="um" data-tip="Nov 2024 — 99.96%"></div>
+      <div class="um" data-tip="Dec 2024 — 100%"></div>
+      <div class="um" data-tip="Jan 2025 — 100%"></div>
+      <div class="um" data-tip="Feb 2025 — 99.99%"></div>
+      <div class="um" data-tip="Mar 2025 — 100%"></div>
+      <div class="um" data-tip="Apr 2025 — 100%"></div>
+    </div>
+    <div class="uptime-legend"><div class="ul-dot"></div>No incidents<div class="ul-dot i" style="margin-left:8px"></div>Minor incident (&lt;1h downtime)</div>
+  </div>
+
+  <hr>
+
+  <!-- SLA Table -->
+  <div class="sec">
+    <div class="sec-hd">
+      <div class="ico"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+      <div>
+        <div class="sec-title">Incident Response SLA</div>
+        <div class="sec-sub">Response and resolution commitments by incident priority level</div>
+      </div>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Priority</th><th>Description</th><th>Response Time</th><th>Resolution Target</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td><strong>P1 — Critical</strong></td><td>Full service outage, all customers affected</td><td><span class="mono">≤ 1 hour</span></td><td><span class="mono">≤ 4 hours</span></td><td><span class="badge b-green">Committed</span></td></tr>
+          <tr><td><strong>P2 — High</strong></td><td>Core feature broken, workaround available</td><td><span class="mono">≤ 4 hours</span></td><td><span class="mono">≤ 1 business day</span></td><td><span class="badge b-green">Committed</span></td></tr>
+          <tr><td><strong>P3 — Medium</strong></td><td>Non-critical bug, UX degraded</td><td><span class="mono">≤ 1 business day</span></td><td><span class="mono">≤ 3 business days</span></td><td><span class="badge b-green">Committed</span></td></tr>
+          <tr><td><strong>P4 — Low</strong></td><td>Questions, feature requests, minor feedback</td><td><span class="mono">≤ 2 business days</span></td><td>Per roadmap</td><td><span class="badge b-amber">Best effort</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- SLA Definitions -->
+  <div class="sec">
+    <div class="sec-hd">
+      <div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div>
+        <div class="sec-title">Availability Commitments &amp; Definitions</div>
+        <div class="sec-sub">How we define, measure, and report uptime</div>
+      </div>
+    </div>
+    <div class="rows">
+      <div class="row"><div class="dot"></div><div><h4>Uptime Calculation</h4><p>Uptime is calculated as: (Total minutes in month − Unplanned downtime minutes) / Total minutes × 100. Planned maintenance windows, scheduled and communicated 72+ hours in advance, are excluded from downtime calculations.</p></div></div>
+      <div class="row"><div class="dot"></div><div><h4>SLA Credit Policy</h4><p>If monthly uptime falls below 99.9%, affected customers are entitled to service credits. Credits are calculated as a percentage of monthly fees: 99.0%–99.9% = 10% credit; 95.0%–99.0% = 25% credit; below 95.0% = 50% credit. Credits must be requested within 30 days.</p></div></div>
+      <div class="row"><div class="dot"></div><div><h4>Disaster Recovery</h4><p>Recovery Point Objective (RPO): ≤ 24 hours. Recovery Time Objective (RTO): ≤ 4 hours. Daily automated backups with 30-day retention are stored in geographically separate regions. DR drills are conducted semi-annually.</p></div></div>
+      <div class="row"><div class="dot"></div><div><h4>Maintenance Windows</h4><p>Planned maintenance is scheduled during low-traffic hours (typically 02:00–06:00 UTC on weekends). All maintenance is announced via email and status page at least 72 hours in advance. Emergency patches may be applied with 2 hours' notice in cases of critical security vulnerabilities.</p></div></div>
+      <div class="row"><div class="dot"></div><div><h4>Monitoring &amp; Alerting</h4><p>All services are monitored 24/7 via automated health checks at 1-minute intervals. The on-call engineering team is paged immediately upon detection of any P1/P2 condition. Customers receive proactive status updates every 30 minutes during active incidents.</p></div></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════
+     TAB 4 — DATA PROTECTION
+═══════════════════════════════════════════ -->
+<div id="pane-data" class="pane">
+
+  <div class="sec">
+    <div class="sec-hd">
+      <div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+      <div>
+        <div class="sec-title">How We Protect Your Data</div>
+        <div class="sec-sub">Technical and organizational measures applied across all Omegatheme products and infrastructure</div>
+      </div>
+    </div>
+    <div class="feat-grid">
+      <div class="feat">
+        <div class="feat-ico"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+        <h4>Encryption at Rest</h4>
+        <p>All merchant data stored in our systems is encrypted using AES-256. Database-level encryption is applied across all environments including staging and production.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h4>Encryption in Transit</h4>
+        <p>All data in transit is protected with TLS 1.3. We enforce HSTS on all public endpoints and reject any connections below TLS 1.2.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ico"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+        <h4>Access Control (RBAC)</h4>
+        <p>Role-based access control ensures employees only access data required for their role. All privileged access requires MFA and is logged and reviewed quarterly.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ico"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <h4>Continuous Monitoring</h4>
+        <p>24/7 automated monitoring with anomaly detection. All access logs, API calls, and admin actions are captured in immutable audit logs retained for 12 months.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ico"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div>
+        <h4>Vulnerability Management</h4>
+        <p>Automated vulnerability scanning runs weekly. Annual penetration testing is conducted by accredited third-party security firms. Critical patches are applied within 24 hours of discovery.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/></svg></div>
+        <h4>Backup &amp; Recovery</h4>
+        <p>Automated daily backups with 30-day retention, stored in geographically separate regions. RPO ≤ 24h, RTO ≤ 4h. DR plans are tested semi-annually.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="sec">
+    <div class="sec-hd">
+      <div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg></div>
+      <div>
+        <div class="sec-title">Data Residency &amp; Sub-processors</div>
+        <div class="sec-sub">Where your data is stored and which third parties may process it on our behalf</div>
+      </div>
+    </div>
+    <div class="rows">
+      <div class="row"><div class="dot"></div><div><h4>Primary Data Residency</h4><p>Production data is hosted on AWS infrastructure in the US-East and AP-Southeast regions. Enterprise customers may request dedicated region configuration (EU, US, or APAC) subject to plan eligibility.</p></div></div>
+      <div class="row"><div class="dot"></div><div><h4>Sub-processor Disclosure</h4><p>Omegatheme uses a limited set of vetted sub-processors including cloud infrastructure (AWS), payment processing (Stripe), transactional email (SendGrid), and error monitoring (Sentry). The full, current sub-processor list is available on request and updated with 30 days' notice.</p></div></div>
+      <div class="row"><div class="dot"></div><div><h4>Cross-border Transfer Safeguards</h4><p>All data transfers outside the EEA are governed by Standard Contractual Clauses (SCCs). Transfer Impact Assessments (TIAs) are maintained for all major third-party data flows and reviewed annually.</p></div></div>
+      <div class="row"><div class="dot"></div><div><h4>Data Retention Policy</h4><p>Active customer data is retained for the duration of the contract plus 90 days post-termination. After this period, data is securely deleted using NIST SP 800-88 compliant methods. Deletion certificates are provided upon request.</p></div></div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="sec">
+    <div class="sec-hd">
+      <div class="ico"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg></div>
+      <div>
+        <div class="sec-title">Your Data Rights</div>
+        <div class="sec-sub">Rights available to merchants and end users under applicable data protection law</div>
+      </div>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Right</th><th>Description</th><th>Response Time</th><th>How to Request</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Right of Access</strong></td><td>Obtain a copy of all personal data we hold about you</td><td><span class="mono">≤ 30 days</span></td><td>privacy@omegatheme.com</td></tr>
+          <tr><td><strong>Right to Rectification</strong></td><td>Correct inaccurate or incomplete personal data</td><td><span class="mono">≤ 14 days</span></td><td>privacy@omegatheme.com</td></tr>
+          <tr><td><strong>Right to Erasure</strong></td><td>Request deletion of your personal data ("right to be forgotten")</td><td><span class="mono">≤ 30 days</span></td><td>privacy@omegatheme.com</td></tr>
+          <tr><td><strong>Right to Portability</strong></td><td>Receive your data in a structured, machine-readable format</td><td><span class="mono">≤ 30 days</span></td><td>privacy@omegatheme.com</td></tr>
+          <tr><td><strong>Right to Object</strong></td><td>Object to processing for direct marketing or legitimate interests</td><td><span class="mono">≤ 30 days</span></td><td>privacy@omegatheme.com</td></tr>
+          <tr><td><strong>Right to Restrict</strong></td><td>Restrict processing while a complaint or dispute is being resolved</td><td><span class="mono">≤ 14 days</span></td><td>privacy@omegatheme.com</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════
+     TAB 5 — COMPLIANCE
+═══════════════════════════════════════════ -->
+<div id="pane-compliance" class="pane">
+
+  <div class="sec">
+    <div class="sec-hd">
+      <div class="ico"><svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+      <div>
+        <div class="sec-title">Compliance Framework Overview</div>
+        <div class="sec-sub">Standards and certifications Omegatheme aligns with, is certified under, or is actively pursuing</div>
+      </div>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Standard / Framework</th><th>Scope</th><th>Status</th><th>Last Reviewed</th><th>Available to Customers</th></tr></thead>
+        <tbody>
+          <tr><td><strong>ISO/IEC 27001</strong></td><td>Information Security Management System</td><td><span class="badge b-green">Aligned</span></td><td>Q1 2025</td><td>Security questionnaire on request</td></tr>
+          <tr><td><strong>SOC 2 Type II</strong></td><td>Security, Availability, Confidentiality</td><td><span class="badge b-amber">In Progress</span></td><td>Audit ongoing</td><td>Bridge letter available</td></tr>
+          <tr><td><strong>GDPR</strong></td><td>EU personal data processing</td><td><span class="badge b-green">Compliant</span></td><td>Q4 2024</td><td>DPA + SCCs available</td></tr>
+          <tr><td><strong>CCPA</strong></td><td>California Consumer Privacy Act</td><td><span class="badge b-green">Aligned</span></td><td>Q4 2024</td><td>Privacy Notice available</td></tr>
+          <tr><td><strong>Shopify Partner Program</strong></td><td>App marketplace standards</td><td><span class="badge b-purple">Certified</span></td><td>Annual renewal</td><td>Public listing</td></tr>
+          <tr><td><strong>Built for Shopify</strong></td><td>Enhanced quality &amp; UX standards</td><td><span class="badge b-purple">Certified</span></td><td>Continuous</td><td>Public badge</td></tr>
+          <tr><td><strong>NIST Cybersecurity Framework</strong></td><td>Identify, Protect, Detect, Respond, Recover</td><td><span class="badge b-green">Aligned</span></td><td>Q2 2024</td><td>Summary on request</td></tr>
+          <tr><td><strong>PCI DSS</strong></td><td>Payment card data (via Stripe)</td><td><span class="badge b-blue">Delegated</span></td><td>N/A</td><td>Stripe attestation available</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="sec">
+    <div class="sec-hd">
+      <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <div>
+        <div class="sec-title">Security Program Highlights</div>
+        <div class="sec-sub">Key controls and practices that underpin our compliance posture</div>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div>
+        <div class="rows">
+          <div class="row"><div class="dot"></div><div><h4>Annual Penetration Testing</h4><p>Independent third-party penetration tests are conducted annually covering web applications, APIs, and internal infrastructure. Findings are remediated within 30 days (critical) or 90 days (high/medium).</p></div></div>
+          <div class="row"><div class="dot"></div><div><h4>Vendor Security Assessment</h4><p>All third-party vendors and sub-processors undergo security review before onboarding. Vendors with access to customer data must demonstrate equivalent security controls and sign DPAs.</p></div></div>
+          <div class="row"><div class="dot"></div><div><h4>Employee Security Training</h4><p>Annual mandatory security awareness training for all employees. Role-specific training for engineers (secure coding, OWASP Top 10) and customer-facing staff (phishing, social engineering).</p></div></div>
+        </div>
+      </div>
+      <div>
+        <div class="rows">
+          <div class="row"><div class="dot"></div><div><h4>Incident Response Plan</h4><p>Documented IRP covering detection, containment, eradication, and recovery phases. The plan is tested via tabletop exercises semi-annually. Customer notification is triggered within 72 hours of a confirmed breach.</p></div></div>
+          <div class="row"><div class="dot"></div><div><h4>Change Management</h4><p>All production changes go through a formal review process: code review, automated testing, staging validation, and approvals before deployment. Emergency changes require post-deployment review.</p></div></div>
+          <div class="row"><div class="dot"></div><div><h4>Business Continuity Planning</h4><p>BCP covering scenarios including data center outage, key-person dependency, and supply chain disruption. Plans are reviewed and updated annually and tested via annual DR drills.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="sec">
+    <div class="sec-hd">
+      <div class="ico"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+      <div>
+        <div class="sec-title">Requesting Compliance Documentation</div>
+        <div class="sec-sub">Available documents for enterprise customers and procurement teams</div>
+      </div>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Document</th><th>Availability</th><th>How to Access</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Security Questionnaire (SIG/CAIQ)</strong></td><td><span class="badge b-green">Available</span></td><td>Request via legal@omegatheme.com</td></tr>
+          <tr><td><strong>Data Processing Agreement (DPA)</strong></td><td><span class="badge b-green">Available</span></td><td>Request via privacy@omegatheme.com</td></tr>
+          <tr><td><strong>Penetration Test Summary</strong></td><td><span class="badge b-green">Available</span></td><td>Under NDA — legal@omegatheme.com</td></tr>
+          <tr><td><strong>SOC 2 Bridge Letter</strong></td><td><span class="badge b-green">Available</span></td><td>Request via legal@omegatheme.com</td></tr>
+          <tr><td><strong>Sub-processor List</strong></td><td><span class="badge b-green">Available</span></td><td>Request via privacy@omegatheme.com</td></tr>
+          <tr><td><strong>Business Continuity Plan Summary</strong></td><td><span class="badge b-green">Available</span></td><td>Under NDA — legal@omegatheme.com</td></tr>
+          <tr><td><strong>SOC 2 Type II Report</strong></td><td><span class="badge b-amber">In Progress</span></td><td>Available Q3 2025 — join waitlist</td></tr>
+          <tr><td><strong>ISO 27001 Certificate</strong></td><td><span class="badge b-amber">Planned</span></td><td>Target Q4 2025</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════
+     TAB 6 — SUPPORT & CONTACTS
+═══════════════════════════════════════════ -->
+<div id="pane-support" class="pane">
+
+  <div class="sec">
+    <div class="sec-hd">
+      <div class="ico"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+      <div>
+        <div class="sec-title">Official Points of Contact</div>
+        <div class="sec-sub">Designated contacts per the SOW — for support, legal, delivery, and data protection matters</div>
+      </div>
+    </div>
+    <div class="contact-grid">
+      <div class="cc">
+        <div class="cc-role">Business Head</div>
+        <h4>Partnership &amp; Enterprise</h4>
+        <p>Strategic decisions, contract-level escalations, and high-priority partnership matters.</p>
+        <a href="mailto:partnership@omegatheme.com">partnership@omegatheme.com</a>
+      </div>
+      <div class="cc">
+        <div class="cc-role">Delivery Manager</div>
+        <h4>Project Delivery</h4>
+        <p>SOW progress tracking, milestone reporting, escalation management, and QBR coordination.</p>
+        <a href="mailto:delivery@omegatheme.com">delivery@omegatheme.com</a>
+      </div>
+      <div class="cc">
+        <div class="cc-role">Technical Support</div>
+        <h4>Engineering &amp; Product Support</h4>
+        <p>Bug reports, integration assistance, API questions, and SLA-governed incident response.</p>
+        <a href="mailto:support@omegatheme.com">support@omegatheme.com</a>
+      </div>
+      <div class="cc">
+        <div class="cc-role">Data Protection</div>
+        <h4>Privacy &amp; Compliance</h4>
+        <p>GDPR / CCPA requests, DPA execution, data subject rights, and compliance documentation.</p>
+        <a href="mailto:privacy@omegatheme.com">privacy@omegatheme.com</a>
+      </div>
+      <div class="cc">
+        <div class="cc-role">Legal</div>
+        <h4>Legal &amp; Contracts</h4>
+        <p>MSA review, NDA execution, security questionnaires, and audit report requests.</p>
+        <a href="mailto:legal@omegatheme.com">legal@omegatheme.com</a>
+      </div>
+      <div class="cc">
+        <div class="cc-role">Security</div>
+        <h4>Security &amp; Vulnerability</h4>
+        <p>Responsible disclosure, security incident reporting, and penetration test coordination.</p>
+        <a href="mailto:security@omegatheme.com">security@omegatheme.com</a>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="sec">
+    <div class="sec-hd">
+      <div class="ico"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+      <div>
+        <div class="sec-title">Support Channels &amp; Hours</div>
+        <div class="sec-sub">How to reach us and what to expect at each channel</div>
+      </div>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Channel</th><th>Availability</th><th>Best For</th><th>SLA</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Helpdesk Portal</strong></td><td>24 / 7</td><td>Bug reports, feature requests, general support</td><td><span class="badge b-green">P1: 1h / P2: 4h</span></td></tr>
+          <tr><td><strong>Email Support</strong></td><td>Mon–Fri, 09:00–18:00 ICT</td><td>Non-urgent questions, account management</td><td><span class="badge b-green">≤ 1 business day</span></td></tr>
+          <tr><td><strong>Dedicated Slack</strong></td><td>Enterprise plan only</td><td>Real-time collaboration, project updates</td><td><span class="badge b-purple">P1: 30 min</span></td></tr>
+          <tr><td><strong>Scheduled Call</strong></td><td>By appointment</td><td>Onboarding, QBR, escalations, strategy</td><td><span class="badge b-amber">48h booking</span></td></tr>
+          <tr><td><strong>Security Hotline</strong></td><td>24 / 7 for incidents</td><td>Active security incidents, data breach notification</td><td><span class="badge b-green">≤ 1 hour</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="sec">
+    <div class="sec-hd">
+      <div class="ico"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+      <div>
+        <div class="sec-title">Complaint &amp; Escalation Process</div>
+        <div class="sec-sub">How we handle feedback, disputes, and formal complaints under the SOW</div>
+      </div>
+    </div>
+    <div class="process" style="padding-left:14px">
+      <div class="pstep">
+        <div class="pstep-n">STEP 01</div>
+        <h4>Submit via Helpdesk or Email</h4>
+        <p>Log your complaint or concern through the helpdesk portal or email support@omegatheme.com. Include a clear description, any relevant screenshots or logs, and the business impact. You will receive an acknowledgement within 4 business hours.</p>
+      </div>
+      <div class="pstep">
+        <div class="pstep-n">STEP 02</div>
+        <h4>Initial Assessment by Support Team</h4>
+        <p>The support team assesses severity and assigns a priority level (P1–P4). For P1/P2 issues, the Delivery Manager is looped in immediately. A formal written response with a resolution plan is provided within 2 business days.</p>
+      </div>
+      <div class="pstep">
+        <div class="pstep-n">STEP 03</div>
+        <h4>Escalation to Delivery Manager</h4>
+        <p>If the initial response is unsatisfactory or the issue remains unresolved beyond the SLA window, the customer may formally escalate to the named Delivery Manager. The DM takes ownership within 4 business hours of escalation.</p>
+      </div>
+      <div class="pstep">
+        <div class="pstep-n">STEP 04</div>
+        <h4>Escalation to Business Head</h4>
+        <p>If escalation to the Delivery Manager does not result in a satisfactory resolution within 5 business days, the matter is escalated to the designated Business Head. A formal resolution meeting is convened within 48 hours.</p>
+      </div>
+      <div class="pstep">
+        <div class="pstep-n">STEP 05</div>
+        <h4>Formal Resolution &amp; Closure</h4>
+        <p>All complaints are resolved with a written closure summary documenting the root cause, actions taken, and any service credits or remedies applied. Closed tickets are retained for 24 months for audit purposes.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="cta">
+    <div class="cta-in">
+      <h3>Need contracts, compliance docs, or a dedicated contact?</h3>
+      <p>Enterprise customers can request the full MSA, SOW template, DPA, sub-processor list, or audit evidence package. Our Trust Team responds within 1 business day.</p>
+      <button class="btn-cta">Contact Trust Team →</button>
+    </div>
+  </div>
+
+</div>
+</div><!-- end .content -->
+
+<script>
+function go(id, el) {
+  document.querySelectorAll('.pane').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
+  document.getElementById('pane-' + id).classList.add('on');
+  el.classList.add('on');
+  window.scrollTo({top: document.querySelector('.tabs').offsetTop - 10, behavior: 'smooth'});
+}
+</script>
+</body>
+</html>
